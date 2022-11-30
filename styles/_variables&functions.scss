@@ -1,0 +1,104 @@
+
+$green: rgb(28,204,91);
+$darkgray: rgb(30,30,30);
+$gray: rgb(77,77,77);
+
+@mixin button {
+  
+}
+
+   
+
+
+@mixin flexCenter($direction){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin flexCustom ($jc, $ai, $fd ) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    flex-direction: $fd;
+}
+
+@mixin absolutefill{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+@mixin absolutecenter{
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+@mixin invisible{
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+@mixin visible{
+    opacity: 1;
+    visibility: visible;
+    z-index: 4;
+}
+
+@mixin clickable{
+    cursor: pointer;
+    transition: 300ms all;
+    
+
+    & :hover{
+        transform: scale(1.1);
+    }
+}
+
+@mixin scrollbar{
+    
+ &::-webkit-scrollbar-track
+ {  
+     background-color: white;
+ }
+ 
+ &::-webkit-scrollbar
+ {  
+   
+     width: 0.45rem;
+     background-color: white;
+ }
+ 
+ &::-webkit-scrollbar-thumb
+ {     
+     background-color: rgb(232,76,61);
+    
+ }
+}
+
+@mixin titleheader {
+  
+}
+
+@mixin input {
+
+}
+
+@mixin textarea{
+ 
+}
+
+@mixin fullScreen{
+  width: 100%;
+  height: 100vh;
+}
+
+
+
+
