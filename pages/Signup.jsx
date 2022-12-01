@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext'
 
@@ -33,7 +33,7 @@ export default function Signup() {
         <input name="email" required value={email} onChange={e => setemail(e.target.value)}></input>
         <p>Password</p>
         <input name="password" required type="password" value={password} onChange={e => setpassword(e.target.value)}></input>
-        <button disabled={loading}>Login</button>
+        <button>Login</button>
     </form>
     </>
   )

@@ -11,7 +11,7 @@ export default function Login() {
     const { user, login } = useAuth()
 
     useEffect(() => {
-        (user) ? router.push('/Dashboard') : console.log("User already logged in")
+        (user) ? router.push('/Dashboard') : console.log("User has not logged in")
       }, [user])
 
  
