@@ -24,7 +24,7 @@ useEffect(() => {
 }, [user]);
    
 
-   console.log(subjects)
+   
 
   return (
     
@@ -32,9 +32,9 @@ useEffect(() => {
     {
       loading ? loading :
     <>
-          <h1>{YearNO}</h1>
+          <h1>Year {YearNO}</h1>
           {subjects.map((subject) => {
-              return <SubjectCard key={subject.ID} Name={subject.Name} credits={subject.credits}></SubjectCard>;
+              return <SubjectCard key={subject.ID} Year={YearNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}
          <form  className={styles.form} onSubmit={(e) => {
           e.preventDefault();

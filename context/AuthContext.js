@@ -54,6 +54,18 @@ export const AuthContextProvider = ({
     });
     }
 
+    const addAssignment = async (YearNO, subjectName, subjectID) => {
+      console.log(subjectID)
+      await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignemnts"), {
+        YearNO: YearNO,
+        Subject: subjectName,
+        Weighting: 25,
+        Name: "Exam",
+        Mark: 0,
+        UID: user.uid
+      });
+      }
+
   
 
   const signup = (email, password) => {
@@ -70,7 +82,7 @@ export const AuthContextProvider = ({
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addYear, addSubject }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addYear, addSubject, addAssignment }}>
       {loading ? null : children}
     </AuthContext.Provider>
   )

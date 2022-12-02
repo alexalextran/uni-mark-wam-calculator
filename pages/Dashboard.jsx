@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext' 
-import { collection, onSnapshot,getFirestore, where  } from "firebase/firestore";
+import { collection, onSnapshot,getFirestore  } from "firebase/firestore";
 import YearCard from './Components/YearCard'; 
 
 export default function Dashboard() {
