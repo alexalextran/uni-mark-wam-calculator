@@ -1,0 +1,38 @@
+@import "variables&functions";
+
+.form{
+    font-size: 1vw;
+    display: flex;
+    width: 70%;
+    border: 2px solid black;
+    justify-content: space-around;
+    text-align: center;
+    height: 3em;
+    margin: 0 auto;
+
+
+   
+    span{
+        @include flexCenter(row);
+        *{
+            padding: 1em;
+        }
+    }
+    
+    p, h5{
+        text-align: center;
+       @include flexCenter(row);
+    }
+    input{
+       @include input;
+       margin: auto;
+       height: 2em;
+       padding: 0.5em;
+      color: black;
+    }
+    button{
+        @include button;
+        height: 3em;
+        border-radius: 0.4rem;
+    }
+}

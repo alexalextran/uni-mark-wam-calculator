@@ -37,21 +37,24 @@ export const AuthContextProvider = ({
   const db = getFirestore();
 
    const addYear = async () => {
-  let years = await getDocs(collection(db, "Years"));
+  let years = await getDocs(collection(db, user.uid));
 
-   await addDoc(collection(db, "Years"), {
+   await setDoc(doc(db, user.uid, ('Year ' + (years.docs.length + 1))), {
     Year: (years.docs.length + 1),
     UID: user.uid
    })
   }
 
-  const addSubject = async (yearID, subjectName, credits) => {
-    await addDoc(collection(db,"Years",yearID, "Subjects"), {
-      YearID: yearID,
+  const addSubject = async (YearNO, subjectName, credits) => {
+    await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects"), {
+      YearNO: YearNO,
       Name: subjectName,
-      Credits: credits
+      Credits: credits,
+      UID: user.uid
     });
     }
+
+  
 
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password)

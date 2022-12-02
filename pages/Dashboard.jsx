@@ -14,13 +14,14 @@ export default function Dashboard() {
 
     useEffect(() => {
       (!user) ? router.push('/Dashboard') : console.log("User not logged in")
-      onSnapshot(collection(db, "Years"), where("UID", "==", user.uid), (snapshot) => {
+      onSnapshot(collection(db, user.uid), (snapshot) => {
         setYears(snapshot.docs.map(doc => ({
             //generate array and populate with id and doc data
             ID: doc.id,
             ...doc.data(),
         })))
         setloading(false)})
+        
 
     }, [user])
 
@@ -37,7 +38,7 @@ export default function Dashboard() {
 
         {
            loading ?  <p>Loading</p> :  Years.map((Year) =>{
-            return   <YearCard key={Year.ID} YearID={Year.ID} YearNO={Year.Year}>  </YearCard> 
+            return   <YearCard key={Year.ID} YearNO={Year.Year} db={db}>  </YearCard> 
             })
 
         }
