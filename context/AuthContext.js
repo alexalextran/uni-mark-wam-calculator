@@ -54,14 +54,14 @@ export const AuthContextProvider = ({
     });
     }
 
-    const addAssignment = async (YearNO, subjectName, subjectID) => {
+    const addAssignment = async (YearNO, subjectName, subjectID, weighting, Asname, Mark) => {
       console.log(subjectID)
-      await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignemnts"), {
+      await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"), {
         YearNO: YearNO,
         Subject: subjectName,
-        Weighting: 25,
-        Name: "Exam",
-        Mark: 0,
+        Weighting: +weighting,
+        Name: Asname,
+        Mark: Mark,
         UID: user.uid
       });
       }

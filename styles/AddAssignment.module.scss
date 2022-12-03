@@ -1,0 +1,17 @@
+@import "variables&functions";
+
+.form{
+    @include flexCustom(space-around, center, row);
+    font-size: 1vw;
+    width: 70%;
+    margin: auto;
+    span{
+        @include flexCenter(row);
+        :nth-child(1){
+            padding-right: 2em;
+        }
+    }
+    input{
+        width: 5em;
+    }
+}

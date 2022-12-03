@@ -13,7 +13,7 @@ export default function Dashboard() {
     const db = getFirestore();
 
     useEffect(() => {
-      (!user) ? router.push('/Dashboard') : console.log("User not logged in")
+      (!user) ? router.push('/Login') : console.log("User logged in")
       onSnapshot(collection(db, user.uid), (snapshot) => {
         setYears(snapshot.docs.map(doc => ({
             //generate array and populate with id and doc data
