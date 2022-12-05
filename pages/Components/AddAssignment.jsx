@@ -22,17 +22,17 @@ export default function AddAssignment({Year, Name, subjectID}) {
               ...doc.data(),
           })))
           setloading(false)})
-         
+     
           
       }, []);
-    
+      console.log(Assignments)
   return (
     <main  >
         
         {
       
-        Assignments.map((Assignment, index) =>{
-             return <><AssignmentCard key={index} Assignment={Assignment}> </AssignmentCard></>
+        Assignments.map((Assignment) =>{
+             return <><AssignmentCard key={Assignment.ID} asID={Assignment.ID}  Assignment={Assignment}> </AssignmentCard></>
         })
         }
 

@@ -6,7 +6,7 @@ import {
   signOut,
 } from 'firebase/auth'
 import { auth } from '../firebase'
-import { collection, addDoc, getFirestore, setDoc, updateDoc, doc, getDocs  } from "firebase/firestore"; 
+import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs  } from "firebase/firestore"; 
 const AuthContext = createContext({})
 
 export const useAuth = () => useContext(AuthContext)
@@ -54,15 +54,19 @@ console.log(user)
     });
     }
 
+    const deleteAssignment = async (YearNO, subjectID, assignmentID) => {
+      await deleteDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID, "Assignments", assignmentID));
+      }
+
     const addAssignment = async (YearNO, subjectName, subjectID, weighting, Asname, Mark) => {
-      console.log(subjectID)
       await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"), {
         YearNO: YearNO,
         Subject: subjectName,
         Weighting: +weighting,
         Name: Asname,
         Mark: Mark,
-        UID: user.uid
+        UID: user.uid,
+        SubjectID: subjectID
       });
       }
 
@@ -82,7 +86,7 @@ console.log(user)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addYear, addSubject, addAssignment }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addYear, addSubject, addAssignment, deleteAssignment }}>
       {loading ? null : children}
     </AuthContext.Provider>
   )
