@@ -6,7 +6,7 @@ import {
   signOut,
 } from 'firebase/auth'
 import { auth } from '../firebase'
-import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs  } from "firebase/firestore"; 
+import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs, updateDoc  } from "firebase/firestore"; 
 const AuthContext = createContext({})
 
 export const useAuth = () => useContext(AuthContext)
@@ -50,12 +50,24 @@ console.log(user)
       YearNO: YearNO,
       Name: subjectName,
       Credits: credits,
-      UID: user.uid
+      UID: user.uid,
+      Mark: 0
     });
     }
 
     const deleteAssignment = async (YearNO, subjectID, assignmentID) => {
       await deleteDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID, "Assignments", assignmentID));
+
+      let totalMark = 0;
+      const assignments = await getDocs(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"))
+      assignments.forEach((doc) => {
+        totalMark += (((+doc.data().Mark)*(+doc.data().Weighting))/100)
+      })
+
+      await updateDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID), {
+        Mark: totalMark
+      })
+      
       }
 
     const addAssignment = async (YearNO, subjectName, subjectID, weighting, Asname, Mark) => {
@@ -68,6 +80,17 @@ console.log(user)
         UID: user.uid,
         SubjectID: subjectID
       });
+
+      let totalMark = 0;
+      const assignments = await getDocs(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"))
+      assignments.forEach((doc) => {
+        totalMark += (((+doc.data().Mark)*(+doc.data().Weighting))/100)
+      })
+      console.log(totalMark)
+
+      await updateDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID), {
+        Mark: totalMark
+      })
       }
 
   

@@ -25,7 +25,7 @@ export default function AddAssignment({Year, Name, subjectID}) {
      
           
       }, []);
-      console.log(Assignments)
+     
   return (
     <main  >
         

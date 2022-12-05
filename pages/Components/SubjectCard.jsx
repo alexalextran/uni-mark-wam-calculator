@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from '../../styles/SubjectCard.module.scss'
 import { useAuth } from '../../context/AuthContext' 
 import AddAssignments from './AddAssignment.jsx'; 
-export default function SubjectCard({Name, credits, Year, subjectID}) {
+export default function SubjectCard({Name, credits, Year, subjectID, Mark}) {
     const { user, addAssignment } = useAuth()
     const [showAssignments, setshowAssignments] = useState(false);
     
@@ -11,7 +11,7 @@ export default function SubjectCard({Name, credits, Year, subjectID}) {
     <main className={styles.main}>
     <h3>{Name}</h3>
     <p>Credits {credits}</p>
-    <p>Current Mark</p>
+    <p>Current Mark {Mark}</p>
     <button onClick={() => {
         //addAssignment(Year, Name, subjectID)
         setshowAssignments(!showAssignments)

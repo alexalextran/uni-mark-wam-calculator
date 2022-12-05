@@ -34,7 +34,7 @@ useEffect(() => {
     <>
           <h1>Year {YearNO}</h1>
           {subjects.map((subject) => {
-              return <SubjectCard key={subject.ID} Year={YearNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
+              return <SubjectCard key={subject.ID} Mark={subject.Mark} Year={YearNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}
          <form  className={styles.form} onSubmit={(e) => {
           e.preventDefault();
