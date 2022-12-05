@@ -19,7 +19,7 @@ export default function SubjectCard({Name, credits, Year, subjectID}) {
     <button>Edit</button>
     </main>
     {
-    showAssignments ? <AddAssignments Year={Year} subjectID={subjectID} Name={Name}></AddAssignments> : <span></span>
+    showAssignments ? <AddAssignments key={subjectID} Year={Year} subjectID={subjectID} Name={Name}></AddAssignments> : <span></span>
     }
     </>
   )

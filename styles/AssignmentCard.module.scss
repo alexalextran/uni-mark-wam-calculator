@@ -1,0 +1,12 @@
+@import "variables&functions";
+
+.main{
+    font-size: 1vw;
+    margin: 0 auto;
+    width: 70%;
+    border-top: 0.15em solid black ;
+    display: grid;
+    grid-template-columns: repeat(3, 3fr) 1fr;
+    justify-items: center;
+    align-items: baseline;
+}

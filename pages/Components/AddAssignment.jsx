@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '../../styles/AddAssignment.module.scss'
 import { useAuth } from '../../context/AuthContext' 
 import { collection, onSnapshot,getFirestore  } from "firebase/firestore";
+import AssignmentCard from './AssignmentCard.jsx'; 
 export default function AddAssignment({Year, Name, subjectID}) {
     const [AsName, setAsName] = useState("")
     const [weighting, setweigthing] = useState()
@@ -22,22 +23,16 @@ export default function AddAssignment({Year, Name, subjectID}) {
           })))
           setloading(false)})
          
-       
+          
       }, []);
     
   return (
     <main  >
         
         {
-
-        Assignments.map((Assignment) =>{
-             return <>
-              <p>{Assignment.Name}</p>
-              <br></br>
-             <p>{Assignment.Weighting}%</p>
-             <br></br>
-             <p>{((Assignment.Mark/100)*(Assignment.Weighting/100)*100)}%</p>
-             </>
+      
+        Assignments.map((Assignment, index) =>{
+             return <><AssignmentCard key={index} Assignment={Assignment}> </AssignmentCard></>
         })
         }
 
