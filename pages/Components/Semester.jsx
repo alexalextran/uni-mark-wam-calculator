@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { collection, onSnapshot  } from "firebase/firestore";
 import styles from '../../styles/YearCard.module.scss'
-import SubjectCard from '../Components/SubjectCard'; 
-export default function Year({YearNO, db}) {
+import SubjectCard from './SubjectCard'; 
+export default function Semester({semesterNO, db}) {
     const [SubjectName, setSubjectName] = useState("")
     const [Credits, setCredits] = useState(0)
     const { user, addSubject  } = useAuth()
@@ -12,13 +12,15 @@ export default function Year({YearNO, db}) {
 
 
 useEffect(() => {
-  onSnapshot(collection(db,user.uid,('Year ' + YearNO), "Subjects"), (snapshot) => {
+  if(user){
+  onSnapshot(collection(db,user.uid,('Semester ' + semesterNO), "Subjects"), (snapshot) => {
     setsubjects(snapshot.docs.map(doc => ({
         //generate array and populate with id and doc data
         ID: doc.id,
         ...doc.data(),
     })))
     setloading(false)})
+  }
    
  
 }, [user]);
@@ -32,13 +34,13 @@ useEffect(() => {
     {
       loading ? loading :
     <>
-          <h1>Year {YearNO}</h1>
+          <h1>Semester {semesterNO}</h1>
           {subjects.map((subject) => {
-              return <SubjectCard key={subject.ID} Mark={subject.Mark} Year={YearNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
+              return <SubjectCard key={subject.ID} Mark={subject.Mark} semesterNO={semesterNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}
          <form  className={styles.form} onSubmit={(e) => {
           e.preventDefault();
-          addSubject(YearNO, SubjectName, Credits);
+          addSubject(semesterNO, SubjectName, Credits);
         } }>
           <h5>Add Subject</h5>
 

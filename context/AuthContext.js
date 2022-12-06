@@ -6,7 +6,7 @@ import {
   signOut,
 } from 'firebase/auth'
 import { auth } from '../firebase'
-import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs, updateDoc  } from "firebase/firestore"; 
+import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs, updateDoc, query, where, collectionGroup  } from "firebase/firestore"; 
 const AuthContext = createContext({})
 
 export const useAuth = () => useContext(AuthContext)
@@ -16,6 +16,10 @@ export const AuthContextProvider = ({
 }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [Contextsubjects, setContextsubjects] = useState([])
+  const [Contextassignments, setContextassignments] = useState([])
+  const [wam, setwam] = useState(0)
+
 console.log(user)
 
   useEffect(() => {
@@ -36,43 +40,60 @@ console.log(user)
 
   const db = getFirestore();
 
-   const addYear = async () => {
-  let years = await getDocs(collection(db, user.uid));
 
-   await setDoc(doc(db, user.uid, ('Year ' + (years.docs.length + 1))), {
-    Year: (years.docs.length + 1),
+  const calulateWAM =  async () => {
+    const q = query(collectionGroup(db, "Subjects"), where("UID", "==",  `${user.uid}`));
+    const querySnapshot = await getDocs(q);
+    let totalmarks = 0
+    let totalcredits = 0
+    console.log(querySnapshot)
+    querySnapshot.forEach((doc) => {
+  
+     totalmarks += +doc.data().Mark * +doc.data().Credits
+     totalcredits += +doc.data().Credits
+  });
+      setwam(totalmarks/totalcredits)
+  }
+
+   const addSemester = async () => {
+  let semsters = await getDocs(collection(db, user.uid));
+
+   await setDoc(doc(db, user.uid, ('Semester ' + (semsters.docs.length + 1))), {
+    semesterNO: (semsters.docs.length + 1),
     UID: user.uid
    })
   }
 
-  const addSubject = async (YearNO, subjectName, credits) => {
-    await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects"), {
-      YearNO: YearNO,
+  const addSubject = async (semesterNO, subjectName, credits) => {
+    await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects"), {
+      semesterNO: semesterNO,
       Name: subjectName,
       Credits: credits,
       UID: user.uid,
       Mark: 0
     });
+   
     }
 
-    const deleteAssignment = async (YearNO, subjectID, assignmentID) => {
-      await deleteDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID, "Assignments", assignmentID));
+    const deleteAssignment = async (semesterNO, subjectID, assignmentID) => {
+      await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID, "Assignments", assignmentID));
 
       let totalMark = 0;
-      const assignments = await getDocs(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"))
+      const assignments = await getDocs(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"))
       assignments.forEach((doc) => {
         totalMark += (((+doc.data().Mark)*(+doc.data().Weighting))/100)
       })
 
-      await updateDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID), {
+      await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
       })
       
+      calulateWAM()
       }
 
-    const addAssignment = async (YearNO, subjectName, subjectID, weighting, Asname, Mark) => {
-      await addDoc(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"), {
-        YearNO: YearNO,
+    const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark) => {
+      await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"), {
+        semesterNO: semesterNO,
         Subject: subjectName,
         Weighting: +weighting,
         Name: Asname,
@@ -82,15 +103,17 @@ console.log(user)
       });
 
       let totalMark = 0;
-      const assignments = await getDocs(collection(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID,  "Assignments"))
+      const assignments = await getDocs(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"))
       assignments.forEach((doc) => {
         totalMark += (((+doc.data().Mark)*(+doc.data().Weighting))/100)
       })
       console.log(totalMark)
 
-      await updateDoc(doc(db, user.uid, ('Year ' + YearNO), "Subjects", subjectID), {
+      await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
       })
+
+      calulateWAM()
       }
 
   
@@ -109,7 +132,7 @@ console.log(user)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addYear, addSubject, addAssignment, deleteAssignment }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam }}>
       {loading ? null : children}
     </AuthContext.Provider>
   )

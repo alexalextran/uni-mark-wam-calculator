@@ -3,26 +3,33 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext' 
 import { collection, onSnapshot,getFirestore  } from "firebase/firestore";
-import YearCard from './Components/YearCard'; 
+import Semester from './Components/Semester'; 
 
 export default function Dashboard() {
-    const { user, logout, addYear, addSubject } = useAuth()
+    const { user, logout, addSemester, calulateWAM, wam } = useAuth()
     const router = useRouter();
     const [loading, setloading] = useState(true)
-    const [Years, setYears] = useState([])
+    const [semesters, setsemesters] = useState([])
     const db = getFirestore();
 
+    
     useEffect(() => {
       (!user) ? router.push('/Login') : console.log("User logged in")
+      if(user){
+        calulateWAM()
       onSnapshot(collection(db, user.uid), (snapshot) => {
-        setYears(snapshot.docs.map(doc => ({
+        setsemesters(snapshot.docs.map(doc => ({
             //generate array and populate with id and doc data
             ID: doc.id,
             ...doc.data(),
         })))
+      
         setloading(false)})
-        
+ 
+     
 
+        }
+        console.log(wam)
     }, [user])
 
     
@@ -33,12 +40,16 @@ export default function Dashboard() {
         }}>signout</button>
 
         <button onClick={() => {
-            addYear()
-        }}>Add Year</button>
+            addSemester()
+        }}>Add Semester</button>
 
         {
-           loading ?  <p>Loading</p> :  Years.map((Year) =>{
-            return   <YearCard key={Year.ID} YearNO={Year.Year} db={db}>  </YearCard> 
+          loading ? <p>Loading</p> : <p>wam {wam}</p>
+        }
+
+        {
+           loading ?  <p>Loading</p> :  semesters.map((semester) =>{
+            return   <Semester key={semester.ID} semesterNO={semester.semesterNO} db={db}>  </Semester> 
             })
 
         }
