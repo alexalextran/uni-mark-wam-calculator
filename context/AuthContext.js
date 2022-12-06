@@ -19,6 +19,7 @@ export const AuthContextProvider = ({
   const [Contextsubjects, setContextsubjects] = useState([])
   const [Contextassignments, setContextassignments] = useState([])
   const [wam, setwam] = useState(0)
+  const [totalcredits, settotalcredits] = useState(0)
 
 console.log(user)
 
@@ -46,13 +47,14 @@ console.log(user)
     const querySnapshot = await getDocs(q);
     let totalmarks = 0
     let totalcredits = 0
-    console.log(querySnapshot)
+  
     querySnapshot.forEach((doc) => {
   
      totalmarks += +doc.data().Mark * +doc.data().Credits
      totalcredits += +doc.data().Credits
   });
-      setwam(totalmarks/totalcredits)
+      settotalcredits(totalcredits)
+      setwam((totalmarks/totalcredits).toFixed(2))
   }
 
    const addSemester = async () => {
@@ -75,6 +77,13 @@ console.log(user)
    
     }
 
+    const deleteSubject = async (semesterNO, subjectID) => {
+      await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID));
+
+      calulateWAM()
+      }
+
+
     const deleteAssignment = async (semesterNO, subjectID, assignmentID) => {
       await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID, "Assignments", assignmentID));
 
@@ -87,7 +96,7 @@ console.log(user)
       await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
       })
-      
+
       calulateWAM()
       }
 
@@ -132,7 +141,7 @@ console.log(user)
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam, deleteSubject, totalcredits}}>
       {loading ? null : children}
     </AuthContext.Provider>
   )

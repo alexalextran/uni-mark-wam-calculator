@@ -13,7 +13,7 @@ const AssignmentCard = ({Assignment, asID}) => {
              <p>Mark - total grade {((Assignment.Mark/100)*(Assignment.Weighting/100)*100).toFixed(1)}%</p>
 
              <button onClick={() => {
-                deleteAssignment(Assignment.YearNO, Assignment.SubjectID, asID)
+                deleteAssignment(Assignment.semesterNO, Assignment.SubjectID, asID)
              }}>Delete</button>
         </main>
     );
