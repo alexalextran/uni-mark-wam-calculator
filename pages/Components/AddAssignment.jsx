@@ -31,7 +31,7 @@ export default function AddAssignment({semesterNO, Name, subjectID}) {
         
         {
       
-        Assignments.map((Assignment) =>{
+        Assignments.sort((a, b) => parseFloat(a.Index) - parseFloat(b.Index)).map((Assignment) =>{
              return <><AssignmentCard key={Assignment.ID} asID={Assignment.ID}  Assignment={Assignment}> </AssignmentCard></>
         })
         }
@@ -40,7 +40,7 @@ export default function AddAssignment({semesterNO, Name, subjectID}) {
         <form  className={styles.form} onSubmit={(e) => {
             e.preventDefault();
 
-            addAssignment(semesterNO, Name, subjectID, weighting, AsName, (((+Mark)/(+OutOf))*100))
+            addAssignment(semesterNO, Name, subjectID, weighting, AsName, (((+Mark)/(+OutOf))*100), (Assignments.length+1))
         }}>
           <h5>Add Assignment</h5>
 

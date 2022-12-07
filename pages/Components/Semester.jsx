@@ -6,7 +6,7 @@ import SubjectCard from './SubjectCard';
 export default function Semester({semesterNO, db}) {
     const [SubjectName, setSubjectName] = useState("")
     const [Credits, setCredits] = useState(0)
-    const { user, addSubject  } = useAuth()
+    const { user, addSubject, wam, totalcredits } = useAuth()
     const [subjects, setsubjects] = useState([])
     const [loading, setloading] = useState(true)
 
@@ -21,12 +21,21 @@ useEffect(() => {
     })))
     setloading(false)})
   }
-   
+ 
  
 }, [user]);
    
+ let allmarks = 0
+  let allcredits = 0
 
-   
+  subjects.forEach((subject) => {
+    allmarks += subject.Mark
+    allcredits += +subject.Credits
+  })
+  console.log((wam  - (((wam*totalcredits) - (allmarks*allcredits)) / (totalcredits-allcredits))).toFixed(3))
+  console.log(wam, '-', (wam*totalcredits), '-', (allmarks*allcredits), '/', (totalcredits-allcredits))
+ 
+
 
   return (
     
@@ -35,6 +44,9 @@ useEffect(() => {
       loading ? loading :
     <>
           <h1>Semester {semesterNO}</h1>
+          {
+             (totalcredits-allcredits == 0) ? allmarks/subjects.length : (wam  - ((((wam*totalcredits) - ((allmarks/subjects.length)*allcredits)) / (totalcredits-allcredits)))).toFixed(3) 
+          }
           {subjects.map((subject) => {
               return <SubjectCard key={subject.ID} Mark={subject.Mark} semesterNO={semesterNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}

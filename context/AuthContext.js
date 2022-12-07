@@ -74,7 +74,7 @@ console.log(user)
       UID: user.uid,
       Mark: 0
     });
-   
+    calulateWAM()
     }
 
     const deleteSubject = async (semesterNO, subjectID) => {
@@ -100,7 +100,7 @@ console.log(user)
       calulateWAM()
       }
 
-    const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark) => {
+    const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark, Index) => {
       await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"), {
         semesterNO: semesterNO,
         Subject: subjectName,
@@ -108,7 +108,8 @@ console.log(user)
         Name: Asname,
         Mark: Mark,
         UID: user.uid,
-        SubjectID: subjectID
+        SubjectID: subjectID,
+        Index
       });
 
       let totalMark = 0;

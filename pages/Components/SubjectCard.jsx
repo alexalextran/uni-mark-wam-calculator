@@ -12,7 +12,7 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
     <h3>{Name}</h3>
     <p>Credits {credits}</p>
     <p>Current Mark {Mark}</p>
-    <p>{ (wam  - (((wam*totalcredits) - (Mark*credits)) / (totalcredits-credits))).toFixed(3)}</p>
+    <p>{ (totalcredits-credits == 0) ? Mark : (wam  - (((wam*totalcredits) - (Mark*credits)) / (totalcredits-credits))).toFixed(3)}</p>
     <button onClick={() => {
         //addAssignment(Year, Name, subjectID)
         setshowAssignments(!showAssignments)
