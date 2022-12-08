@@ -55,6 +55,6 @@ export default function Dashboard() {
         }
         
 
-        Dashboard</div>
+        </div>
   )
 }

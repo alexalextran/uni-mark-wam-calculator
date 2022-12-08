@@ -1,14 +1,44 @@
 @import "variables&functions";
 
+.main{
+    background-color: $white;
+    width: 70%;
+    margin: 0 auto;
+    font-size: 1vw;
+    border-radius: 50px;
+    box-shadow: 0.2em 0.2em 0.6em 0.2em #a8a5a5;
+    h1{
+        text-align: center;
+        padding-top: 0.7em;
+    }
+    .wam{
+        text-align: center;
+        span{
+            color: $green;
+        }
+        border-bottom: 0.2em solid $blue;
+        width: 90%;
+        margin: 0 auto;
+        padding-bottom: 1em;
+    }
+
+
 .form{
+    background-color: $blue;
+    width: 100%;
     font-size: 1vw;
     display: flex;
-    width: 70%;
     justify-content: space-around;
     text-align: center;
     height: 3em;
     margin: 0 auto;
     align-items: center;
+    border-radius: inherit;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    color: white;
+    height: fit-content;
+    
 
 
    
@@ -35,4 +65,5 @@
         height: 3em;
         border-radius: 0.4rem;
     }
+}
 }

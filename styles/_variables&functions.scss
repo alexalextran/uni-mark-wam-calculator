@@ -1,7 +1,10 @@
 
 $green: rgb(28,204,91);
-$darkgray: rgb(30,30,30);
-$gray: rgb(77,77,77);
+$darkgray: rgb(21,19,30);
+$gray: rgb(33,30,43);
+$darkwhite: rgb(223,218,228);
+$white: rgb(243,240,245);
+$blue: rgb(84,101,222);
 
 @mixin button {
   aspect-ratio: 7/2;
@@ -88,8 +91,9 @@ $gray: rgb(77,77,77);
 
 @mixin input {
 outline: none;
-border: none;
+border: black 2px solid;
 background-color: rgb(240, 240, 240);
+
 }
 
 @mixin textarea{

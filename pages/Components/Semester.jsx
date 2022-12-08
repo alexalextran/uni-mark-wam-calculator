@@ -32,24 +32,29 @@ useEffect(() => {
     allmarks += subject.Mark
     allcredits += +subject.Credits
   })
-  console.log((wam  - (((wam*totalcredits) - (allmarks*allcredits)) / (totalcredits-allcredits))).toFixed(3))
-  console.log(wam, '-', (wam*totalcredits), '-', (allmarks*allcredits), '/', (totalcredits-allcredits))
  
-
+var wamImpact = (wam  - ((((wam*totalcredits) - ((allmarks/subjects.length)*allcredits)) / (totalcredits-allcredits)))).toFixed(3) 
 
   return (
     
     <>
     {
       loading ? loading :
-    <>
+    <main className={styles.main}>
           <h1>Semester {semesterNO}</h1>
           {
-             (totalcredits-allcredits == 0) ? allmarks/subjects.length : (wam  - ((((wam*totalcredits) - ((allmarks/subjects.length)*allcredits)) / (totalcredits-allcredits)))).toFixed(3) 
+            <p className={styles.wam}>
+             Impact on wam for this semester:   
+            <span style={{color: wamImpact > 0  ? 'green' : 'red'}}>
+              {(totalcredits-allcredits == 0) ? allmarks/subjects.length : wamImpact}
+             </span>
+             </p>
           }
           {subjects.map((subject) => {
               return <SubjectCard key={subject.ID} Mark={subject.Mark} semesterNO={semesterNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}
+
+            
          <form  className={styles.form} onSubmit={(e) => {
           e.preventDefault();
           addSubject(semesterNO, SubjectName, Credits);
@@ -68,7 +73,7 @@ useEffect(() => {
 
           <button>Submit</button>
         </form>
-    </>
+    </main>
     }
     </>
     
