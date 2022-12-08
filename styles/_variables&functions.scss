@@ -8,6 +8,12 @@ $blue: rgb(84,101,222);
 
 @mixin button {
   aspect-ratio: 7/2;
+  border-radius: 0.4em;
+  font-size: 0.6em;
+  outline: none;
+  color: white;
+  background-color: $blue;
+  border: 0.15em solid black;
 }
 
    

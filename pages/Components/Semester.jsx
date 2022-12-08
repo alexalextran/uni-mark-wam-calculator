@@ -50,11 +50,14 @@ var wamImpact = (wam  - ((((wam*totalcredits) - ((allmarks/subjects.length)*allc
              </span>
              </p>
           }
+
+        
+
           {subjects.map((subject) => {
               return <SubjectCard key={subject.ID} Mark={subject.Mark} semesterNO={semesterNO} Name={subject.Name} credits={subject.Credits} subjectID={subject.ID}></SubjectCard>;
             })}
 
-            
+
          <form  className={styles.form} onSubmit={(e) => {
           e.preventDefault();
           addSubject(semesterNO, SubjectName, Credits);

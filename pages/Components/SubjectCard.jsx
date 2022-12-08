@@ -6,13 +6,14 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
     const { user, deleteSubject, wam, totalcredits} = useAuth()
     const [showAssignments, setshowAssignments] = useState(false);
     
+    var wamImpact = (wam  - (((wam*totalcredits) - (Mark*credits)) / (totalcredits-credits))).toFixed(3)
   return (
     <>
     <main className={styles.main}>
     <h3>{Name}</h3>
     <p>Credits {credits}</p>
-    <p>Current Mark {Mark}</p>
-    <p>{ (totalcredits-credits == 0) ? Mark : (wam  - (((wam*totalcredits) - (Mark*credits)) / (totalcredits-credits))).toFixed(3)}</p>
+    <p>Mark {Mark}</p>
+    <p style={{color: wamImpact > 0  ? 'green' : 'red'}}>{ (totalcredits-credits == 0) ? Mark : wamImpact }</p>
     <button onClick={() => {
         //addAssignment(Year, Name, subjectID)
         setshowAssignments(!showAssignments)
