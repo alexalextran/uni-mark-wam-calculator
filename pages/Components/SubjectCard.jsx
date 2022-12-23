@@ -10,6 +10,8 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
     const [Assignments, setAssignments] = useState([]);
     const db = getFirestore();
     const customMark = useRef();
+    
+    
 
    
 
@@ -20,10 +22,12 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
             ...doc.data(),
         })))
         })
-        console.log("bruh", Assignments)
+      
+
+        
         
     }, []);
-    console.log(customMark)
+    
 
     if(customMark.current != undefined){
     customMark.current.addEventListener("keyup", async (event) => {
@@ -53,7 +57,7 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
     }}>Delete</button>
     </main>
     {
-    showAssignments ? <AddAssignments key={subjectID} semesterNO={semesterNO} subjectID={subjectID} Name={Name}></AddAssignments> : <span></span>
+    showAssignments ? <AddAssignments key={subjectID} Assignments={Assignments} customMark={customMark.current} semesterNO={semesterNO} subjectID={subjectID} Name={Name}></AddAssignments> : <span></span>
     }
     </>
   )

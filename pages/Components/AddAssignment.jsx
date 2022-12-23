@@ -3,27 +3,27 @@ import styles from '../../styles/AddAssignment.module.scss'
 import { useAuth } from '../../context/AuthContext' 
 import { collection, onSnapshot,getFirestore  } from "firebase/firestore";
 import AssignmentCard from './AssignmentCard.jsx'; 
-export default function AddAssignment({semesterNO, Name, subjectID}) {
+export default function AddAssignment({semesterNO, Name, subjectID, Assignments}) {
     const [AsName, setAsName] = useState("")
     const [weighting, setweigthing] = useState()
     const [Mark, setMark] = useState()
     const [OutOf, setOutOf] = useState()
     const { addAssignment, user } = useAuth()
-    const [Assignments, setAssignments] = useState([])
+  
     const [loading, setloading] = useState(true)
     const db = getFirestore();
 
 
-    useEffect(() => {
-        onSnapshot(collection(db,user.uid,('Semester ' + semesterNO), "Subjects", subjectID, "Assignments"), (snapshot) => {
-            setAssignments(snapshot.docs.map(doc => ({
-              //generate array and populate with id and doc data
-              ID: doc.id,
-              ...doc.data(),
-          })))
-          setloading(false)})
+    // useEffect(() => {
+    //     onSnapshot(collection(db,user.uid,('Semester ' + semesterNO), "Subjects", subjectID, "Assignments"), (snapshot) => {
+    //         setAssignments(snapshot.docs.map(doc => ({
+    //           //generate array and populate with id and doc data
+    //           ID: doc.id,
+    //           ...doc.data(),
+    //       })))
+    //       setloading(false)})
           
-      }, []);
+    //   }, []);
      
   return (
     <main  >
@@ -37,8 +37,7 @@ export default function AddAssignment({semesterNO, Name, subjectID}) {
 
 
         <form  className={styles.form} onSubmit={(e) => {
-            e.preventDefault();
-
+            e.preventDefault()
             addAssignment(semesterNO, Name, subjectID, weighting, AsName, (((+Mark)/(+OutOf))*100), (Assignments.length+1))
         }}>
           <h5>Add Assignment</h5>
