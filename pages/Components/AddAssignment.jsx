@@ -22,7 +22,6 @@ export default function AddAssignment({semesterNO, Name, subjectID}) {
               ...doc.data(),
           })))
           setloading(false)})
-          console.log(Assignments)
           
       }, []);
      
