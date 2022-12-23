@@ -9,6 +9,7 @@
     text-align: center;
     grid-template-columns:  repeat(4, 1fr) 0.66fr 0.66fr 0.66fr;
     column-gap: 1em;
+ 
     :nth-child(1){
         border-left:  0.1em solid $blue;
         border-right: 0.1em solid $blue;
@@ -19,5 +20,17 @@
 
     button{
         @include button
+    }
+
+    .markform{
+        height: inherit;
+        *{
+            border: none;
+        }
+
+        input{
+            width: 50%
+        }
+        @include flexCustom(space-around, center, row);
     }
 }

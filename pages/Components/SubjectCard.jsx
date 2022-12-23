@@ -12,7 +12,9 @@ export default function SubjectCard({Name, credits, semesterNO, subjectID, Mark}
     <main className={styles.main}>
     <h3>{Name}</h3>
     <p>Credits {credits}</p>
-    <p>Mark {Mark}</p>
+    <span className={styles.markform}>
+      <p>Mark</p>
+    <input defaultValue={Mark} readOnly={false}></input></span>
     <p style={{color: wamImpact > 0  ? 'green' : 'red'}}>{ (totalcredits-credits == 0) ? Mark : wamImpact }</p>
     <button onClick={() => {
         //addAssignment(Year, Name, subjectID)
