@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import styles from "../../styles/AddAssignment.module.scss";
 import { useAuth } from "../../context/AuthContext";
-import { collection, onSnapshot, getFirestore } from "firebase/firestore";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 import AssignmentCard from "./AssignmentCard.jsx";
 export default function AddAssignment({
   semesterNO,
   Name,
   subjectID,
   Assignments,
+  customMark
 }) {
   const [AsName, setAsName] = useState("");
   const [weighting, setweigthing] = useState();
@@ -16,16 +17,12 @@ export default function AddAssignment({
   const { addAssignment, user } = useAuth();
   const db = getFirestore();
 
-  // useEffect(() => {
-  //     onSnapshot(collection(db,user.uid,('Semester ' + semesterNO), "Subjects", subjectID, "Assignments"), (snapshot) => {
-  //         setAssignments(snapshot.docs.map(doc => ({
-  //           //generate array and populate with id and doc data
-  //           ID: doc.id,
-  //           ...doc.data(),
-  //       })))
-  //       setloading(false)})
+  const getSubject = async ()  => {
+    const subject = await getDoc(doc(db,user.uid,('Semester ' + semesterNO), "Subjects", subjectID))
+    console.log(subject.data().Mark)
+    customMark.value = await subject.data().Mark
+    }
 
-  //   }, []);
 
   return (
     <main>
@@ -35,6 +32,8 @@ export default function AddAssignment({
         return (
           <>
             <AssignmentCard
+              getSubject={getSubject}
+              customMark={customMark}
               key={Assignment.ID}
               asID={Assignment.ID}
               Assignment={Assignment}
@@ -57,7 +56,9 @@ export default function AddAssignment({
             AsName,
             (+Mark / +OutOf) * 100,
             Assignments.length + 1
-          );
+          ).then( getSubject() )
+         
+
           //todo retrieve the updated mark from db and set the input value to that new mark
         }}
       >

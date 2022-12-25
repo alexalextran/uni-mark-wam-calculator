@@ -21,7 +21,7 @@ export const AuthContextProvider = ({
   const [wam, setwam] = useState(0)
   const [totalcredits, settotalcredits] = useState(0)
 
-console.log(user)
+//console.log(user)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -117,8 +117,7 @@ console.log(user)
       assignments.forEach((doc) => {
         totalMark += (((+doc.data().Mark)*(+doc.data().Weighting))/100)
       })
-      console.log(totalMark)
-
+     
       await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
       })
