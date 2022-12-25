@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router';
-import { useAuth } from '../context/AuthContext'
+import React, {useState } from 'react'
+
 
 export default function Signup() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
-    const router = useRouter();
     const [error, setError] = useState(null);
-    const { user, signup } = useAuth()
 
-    useEffect(() => {
-        (user) ? router.push('/Dashboard') : console.log("User already logged in")
-      }, [user])
+
  
      const handleSignup = async (e) => {
           e.preventDefault()

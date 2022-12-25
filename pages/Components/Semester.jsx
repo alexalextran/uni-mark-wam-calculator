@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { collection, onSnapshot } from "firebase/firestore";
-import styles from "../../styles/YearCard.module.scss";
+import styles from "../../styles/SemesterCard.module.scss";
 import SubjectCard from "./SubjectCard";
 export default function Semester({ semesterNO, db }) {
   const [SubjectName, setSubjectName] = useState("");
