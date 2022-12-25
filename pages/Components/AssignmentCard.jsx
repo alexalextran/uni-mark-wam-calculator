@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "../../styles/AssignmentCard.module.scss";
 import { useAuth } from "../../context/AuthContext";
-import { getFirestore } from "firebase/firestore";
 
-const AssignmentCard = ({ Assignment, asID, getSubject }) => {
+
+const AssignmentCard = ({ Assignment, asID }) => {
   const { deleteAssignment } = useAuth();
-  //const db = getFirestore();
   
 
   return (
@@ -24,7 +23,7 @@ const AssignmentCard = ({ Assignment, asID, getSubject }) => {
 
       <button
         onClick={() => {
-          deleteAssignment(Assignment.semesterNO, Assignment.SubjectID, asID).then(getSubject())
+          deleteAssignment(Assignment.semesterNO, Assignment.SubjectID, asID)
         }}
       >
         Delete

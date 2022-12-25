@@ -66,13 +66,13 @@ export const AuthContextProvider = ({
    })
   }
 
-  const addSubject = async (semesterNO, subjectName, credits) => {
+  const addSubject = async (semesterNO, subjectName, credits, Mark) => {
     await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects"), {
       semesterNO: semesterNO,
       Name: subjectName,
       Credits: credits,
       UID: user.uid,
-      Mark: 0
+      Mark: +Mark
     });
     calulateWAM()
     }

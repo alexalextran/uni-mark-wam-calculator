@@ -65,14 +65,7 @@ export default function SubjectCard({
       <main className={styles.main}>
         <h3>{Name}</h3>
         <p>Credits {credits}</p>
-        <span className={styles.markform}>
-          <p>Mark</p>
-          <input
-            ref={customMark}
-            readOnly={Assignments.length != 0}
-            defaultValue={Mark}
-          ></input>
-        </span>
+          <p>Mark {Mark}</p>
         <p style={{ color: wamImpact > 0 ? "green" : "red" }}>
           {totalcredits - credits == 0 ? Mark : wamImpact}
         </p>

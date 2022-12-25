@@ -6,6 +6,7 @@ import SubjectCard from "./SubjectCard";
 export default function Semester({ semesterNO, db }) {
   const [SubjectName, setSubjectName] = useState("");
   const [Credits, setCredits] = useState(0);
+  const [Mark, setMark] = useState(0);
   const { user, addSubject, wam, totalcredits } = useAuth();
   const [subjects, setsubjects] = useState([]);
   const [loading, setloading] = useState(true);
@@ -77,7 +78,7 @@ export default function Semester({ semesterNO, db }) {
             className={styles.form}
             onSubmit={(e) => {
               e.preventDefault();
-              addSubject(semesterNO, SubjectName, Credits);
+              addSubject(semesterNO, SubjectName, Credits, Mark);
             }}
           >
             <h5>Add Subject</h5>
@@ -88,6 +89,16 @@ export default function Semester({ semesterNO, db }) {
                 name="subjectName"
                 required
                 onChange={(e) => setSubjectName(e.target.value)}
+              ></input>
+            </span>
+
+
+            <span>
+              <p>Mark</p>
+              <input
+                name="Mark"
+                required
+                onChange={(e) => setMark(e.target.value)}
               ></input>
             </span>
 
