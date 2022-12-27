@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-
+import styles from "../../styles/LoginCard.module.scss";
 
 export default function Signup() {
     const [email, setemail] = useState("");
@@ -21,7 +21,7 @@ export default function Signup() {
 
   return (
 
-    <>
+    <main className={styles.main}>
     <form onSubmit={handleSignup}>
         <h1>Sign Up</h1>
         <p>Email</p>
@@ -30,6 +30,6 @@ export default function Signup() {
         <input name="password" required type="password" value={password} onChange={e => setpassword(e.target.value)}></input>
         <button>Login</button>
     </form>
-    </>
+    </main>
   )
 }

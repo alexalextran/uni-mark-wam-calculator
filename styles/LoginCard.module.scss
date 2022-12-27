@@ -1,0 +1,24 @@
+@import "variables&functions";
+
+.main{
+    font-size: 1.3vw;
+  width: 100vw;
+  height: 90vh;
+  @include flexCenter(row);
+   form{
+    input{
+        background: none;
+        border: none;
+        width: 20em;
+        color: $blue;
+        padding: 1em;
+        border-bottom: 2px solid black;
+        font-size: 1.4em;
+        &:focus{
+            border-bottom: 2px solid $blue;
+            transition: border 0.5s;
+            outline: none;
+        }
+    }
+   }
+}
