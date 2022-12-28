@@ -27,24 +27,13 @@ let tilesize = new Array(columns*rows).fill(0)
         (user) ? router.push('/Dashboard') : console.log("User has not logged in")
       }, [user])
 
-
-
-
-const colors = [
-  "rgb(229, 57, 53)",
-  "rgb(253, 216, 53)",
-  "rgb(156, 39, 176)",
-  "rgb(2, 2, 2)",
-  "rgb(156, 156, 156)",
-]
-
-let count =  - 1
+let toggled =  false
 
 const handleOnClick = index => {
-  count = count + 1
+  toggled = !toggled
   let animation = anime({
     targets: `#tiles`,
-    backgroundColor: colors[count % (colors.length - 1)],
+    opacity: toggled ? 0 : 1,
     delay: anime.stagger(50, {
       grid: [columns, rows],
       from: index
@@ -54,14 +43,14 @@ const handleOnClick = index => {
 }
 
   return (
-    <main className={styles.main}>
+    <main className={styles.mainwrapper}>
+      <div className={styles.main}>
     {/* <button onClick={() => {
             settoggleSignup(!toggleSignup);
           } }>Swtich</button>
     {
-      toggleSignup ? <Signup/> : <LoginBox/>
+      toggled ? <Signup/> : <LoginBox/>
     } */}
-    <p className='nice'>Nice</p>
     <div id={styles.tile} style={{gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)`}}>
     {
       
@@ -79,7 +68,7 @@ const handleOnClick = index => {
       })
     }
     </div>
-
+      </div>
 
     </main>
   )
