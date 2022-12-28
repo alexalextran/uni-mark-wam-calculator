@@ -11,9 +11,10 @@
         border: none;
         width: 20em;
         color: $blue;
-        padding: 1em;
+        padding: 0.6em;
         border-bottom: 2px solid black;
-        font-size: 1.4em;
+        font-size: 1.1em;
+        transition: border 0.5s;
         &:focus{
             border-bottom: 2px solid $blue;
             transition: border 0.5s;
