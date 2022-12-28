@@ -8,12 +8,10 @@ import useWindowDimensions from '../Hooks/useWindowDimensions';
 import anime from 'animejs';
 
 export default function Index() {
-  const {Anime} = anime
-  const animation = useRef(null);
 
     const router = useRouter();
     const [error, setError] = useState(null);
-    const [toggleSignup, settoggleSignup] = useState(false)
+    const [toggleLogIn, settoggleLogIn] = useState(true)
     const { user, login } = useAuth()
     const { height, width } = useWindowDimensions();
 
@@ -27,13 +25,11 @@ let tilesize = new Array(columns*rows).fill(0)
         (user) ? router.push('/Dashboard') : console.log("User has not logged in")
       }, [user])
 
-let toggled =  false
-
 const handleOnClick = index => {
-  toggled = !toggled
+  settoggleLogIn(!toggleLogIn)
   let animation = anime({
     targets: `#tiles`,
-    opacity: toggled ? 0 : 1,
+    opacity: toggleLogIn ? 0 : 1,
     delay: anime.stagger(50, {
       grid: [columns, rows],
       from: index
@@ -45,15 +41,11 @@ const handleOnClick = index => {
   return (
     <main className={styles.mainwrapper}>
       <div className={styles.main}>
-    {/* <button onClick={() => {
-            settoggleSignup(!toggleSignup);
-          } }>Swtich</button>
-    {
-      toggled ? <Signup/> : <LoginBox/>
-    } */}
+   
     <div id={styles.tile} style={{gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)`}}>
     {
       
+
       tilesize.map((bruh, index) => {
         return ( (
           <>
@@ -67,6 +59,10 @@ const handleOnClick = index => {
         ))
       })
     }
+
+      {
+        toggleLogIn ? <LoginBox/> : <Signup/>
+      }
     </div>
       </div>
 
