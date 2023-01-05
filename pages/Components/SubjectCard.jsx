@@ -26,6 +26,8 @@ export default function SubjectCard({
   const db = getFirestore();
   const customMark = useRef();
 
+ 
+
   useEffect(() => {
     onSnapshot(
       collection(
@@ -60,6 +62,7 @@ export default function SubjectCard({
     });
   }
 
+  
   return (
     <>
       <main className={styles.main}>

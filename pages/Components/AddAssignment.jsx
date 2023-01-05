@@ -19,10 +19,11 @@ export default function AddAssignment({
     <main>
       {Assignments.sort(
         (a, b) => parseFloat(a.Index) - parseFloat(b.Index)
-      ).map((Assignment) => {
+      ).map((Assignment, index) => {
         return (
           <>
             <AssignmentCard
+              index={index}
               key={Assignment.ID}
               asID={Assignment.ID}
               Assignment={Assignment}

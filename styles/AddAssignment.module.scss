@@ -5,13 +5,25 @@
     font-size: 1vw;
     width: 70%;
     margin: auto;
+    background: rgba(255,92,53, .7);
+    
     span{
         @include flexCenter(row);
+        text-align: center;
         :nth-child(1){
-            padding-right: 2em;
+            padding-right: 1em;
         }
     }
-    input{
-        width: 5em;
+    span:first-of-type{
+        @include flexCenter(row);
+        input{
+            width: 5em;
+        }
     }
+   
+    input{
+        width: 2em;
+    }
+    
+   
 }
