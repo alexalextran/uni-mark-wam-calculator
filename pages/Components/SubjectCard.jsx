@@ -15,6 +15,7 @@ export default function SubjectCard({
   semesterNO,
   subjectID,
   Mark,
+  
 }) {
   const { user, deleteSubject, wam, totalcredits } = useAuth();
   const [showAssignments, setshowAssignments] = useState(false);
@@ -91,6 +92,7 @@ export default function SubjectCard({
       {showAssignments ? (
         <AddAssignments
           key={subjectID}
+          showAssignments={showAssignments}
           Assignments={Assignments}
           customMark={customMark.current}
           semesterNO={semesterNO}

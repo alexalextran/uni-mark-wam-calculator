@@ -2,6 +2,7 @@ import React, {useState } from "react";
 import styles from "../../styles/AddAssignment.module.scss";
 import { useAuth } from "../../context/AuthContext";
 import AssignmentCard from "./AssignmentCard.jsx";
+import { useSpring, animated } from '@react-spring/web'
 export default function AddAssignment({
   semesterNO,
   Name,
@@ -14,8 +15,14 @@ export default function AddAssignment({
   const [OutOf, setOutOf] = useState();
   const { addAssignment } = useAuth();
 
+  const trans = useSpring({
+    from: { y: -50, opacity: 0},
+    to: { y: 0, opacity: 1},
+    delay: Assignments.length*200
+  })
 
   return (
+    
     <main>
       {Assignments.sort(
         (a, b) => parseFloat(a.Index) - parseFloat(b.Index)
@@ -33,7 +40,7 @@ export default function AddAssignment({
           </>
         );
       })}
-
+    <animated.div style={trans}>
       <form
         className={styles.form}
         onSubmit={(e) => {
@@ -87,6 +94,8 @@ export default function AddAssignment({
 
         <button>Submit</button>
       </form>
+      </animated.div>
     </main>
+   
   );
 }

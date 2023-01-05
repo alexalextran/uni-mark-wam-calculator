@@ -8,9 +8,9 @@ const AssignmentCard = ({ Assignment, asID, index }) => {
   const { deleteAssignment } = useAuth();
   
   const trans = useSpring({
-    from: { y: -50*index, opacity: 0 },
+    from: { y: -50, opacity: 0 },
     to: { y: 0, opacity: 1 },
-    delay: index*200
+    delay: index*150
   })
 
 
