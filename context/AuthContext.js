@@ -67,14 +67,15 @@ export const AuthContextProvider = ({
    })
   }
 
-  const checkWeighting = async (weighting , subjectID) => {
+  async function checkWeighting(weighting , subjectID){
     const q = query(collectionGroup(db, "Assignments"), where("SubjectID", "==",  `${subjectID}`));
     const querySnapshot = await getDocs(q);
     let totalWeighting = 0
     querySnapshot.forEach((doc) => {
       totalWeighting += +doc.data().Weighting
   });
-    throw(totalWeighting + weighting > 100) 
+  console.log(+totalWeighting + +weighting > 100)
+    return(+totalWeighting + +weighting > 100) 
   }
 
 
@@ -117,8 +118,9 @@ export const AuthContextProvider = ({
 
     const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark, Index) => {
       try {
-       if (checkWeighting(weighting, subjectID) ){
-        throw new Error("Weighting for assignments should not add to more than 100")
+
+       if (await checkWeighting(weighting, subjectID)){
+        throw new Error("Weighting for assignments should not add to more than 100, Please try again")
        }
       
       await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"), {
@@ -140,8 +142,7 @@ export const AuthContextProvider = ({
      
       await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
-      })} 
-      catch (error) {
+      })} catch (error) {
         alert(error.message)
       }
 
