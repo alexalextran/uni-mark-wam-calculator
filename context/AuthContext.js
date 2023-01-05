@@ -7,6 +7,7 @@ import {
 } from 'firebase/auth'
 import { auth } from '../firebase'
 import { collection, addDoc, getFirestore, setDoc, deleteDoc, doc, getDocs, updateDoc, query, where, collectionGroup  } from "firebase/firestore"; 
+
 const AuthContext = createContext({})
 
 export const useAuth = () => useContext(AuthContext)
@@ -66,14 +67,28 @@ export const AuthContextProvider = ({
    })
   }
 
+  const checkWeighting = async (weighting , subjectID) => {
+    const q = query(collectionGroup(db, "Assignments"), where("SubjectID", "==",  `${subjectID}`));
+    const querySnapshot = await getDocs(q);
+    let totalWeighting = 0
+    querySnapshot.forEach((doc) => {
+      totalWeighting += +doc.data().Weighting
+  });
+    throw(totalWeighting + weighting > 100) 
+  }
+
+
   const addSubject = async (semesterNO, subjectName, credits, Mark) => {
-    await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects"), {
-      semesterNO: semesterNO,
-      Name: subjectName,
-      Credits: credits,
-      UID: user.uid,
-      Mark: +Mark
-    });
+    
+      await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects"), {
+        semesterNO: semesterNO,
+        Name: subjectName,
+        Credits: credits,
+        UID: user.uid,
+        Mark: +Mark
+      });
+   
+  
     calulateWAM()
     }
 
@@ -101,6 +116,11 @@ export const AuthContextProvider = ({
       }
 
     const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark, Index) => {
+      try {
+       if (checkWeighting(weighting, subjectID) ){
+        throw new Error("Weighting for assignments should not add to more than 100")
+       }
+      
       await addDoc(collection(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID,  "Assignments"), {
         semesterNO: semesterNO,
         Subject: subjectName,
@@ -120,7 +140,10 @@ export const AuthContextProvider = ({
      
       await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
         Mark: totalMark
-      })
+      })} 
+      catch (error) {
+        alert(error.message)
+      }
 
       calulateWAM()
       }

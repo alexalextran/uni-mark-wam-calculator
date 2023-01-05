@@ -38,7 +38,7 @@ const Login = () => {
         ></input>
         <br></br>
         <span>
-           <button>Sign up</button>
+           <button>Login</button>
         <button> Don&#39;t have an account?</button>
         </span>
       </form>
