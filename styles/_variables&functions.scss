@@ -96,11 +96,18 @@ $blue: rgb(84,101,222);
   
 }
 
-@mixin input {
-outline: none;
-border: black 2px solid;
-background-color: rgb(240, 240, 240);
-
+@mixin input {      
+        background: none;
+        border: none;
+        color: $blue;
+        border-bottom:  0.2em solid black;
+        font-size: 1em;
+        transition: border 0.5s;
+        &:focus{
+            border-bottom: 0.2em solid $blue;
+            transition: border 0.5s;
+            outline: none;
+        }
 }
 
 @mixin textarea{
