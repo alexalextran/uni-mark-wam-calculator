@@ -9,14 +9,16 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import EditModal from "./EditModal";
 export default function SubjectCard({
   Name,
   credits,
   semesterNO,
   subjectID,
   Mark,
-  
 }) {
+
+
   const { user, deleteSubject, wam, totalcredits } = useAuth();
   const [showAssignments, setshowAssignments] = useState(false);
   var wamImpact = (
@@ -26,8 +28,7 @@ export default function SubjectCard({
   const [Assignments, setAssignments] = useState([]);
   const db = getFirestore();
   const customMark = useRef();
-
- 
+  const [edit, setedit] = useState(false);
 
   useEffect(() => {
     onSnapshot(
@@ -63,16 +64,16 @@ export default function SubjectCard({
     });
   }
 
-  
   return (
     <>
       <main className={styles.main}>
         <h3>{Name}</h3>
         <p>Credits {credits}</p>
-          <p>Mark {Mark}</p>
+        <p>Mark {Mark}</p>
         <p style={{ color: wamImpact > 0 ? "green" : "red" }}>
           {totalcredits - credits == 0 ? Mark : wamImpact}
         </p>
+
         <button
           onClick={() => {
             setshowAssignments(!showAssignments);
@@ -80,7 +81,15 @@ export default function SubjectCard({
         >
           Assignments
         </button>
-        <button>Edit</button>
+
+        <button
+          onClick={() => {
+            setedit(true);
+          }}
+        >
+          Edit
+        </button>
+
         <button
           onClick={() => {
             deleteSubject(semesterNO, subjectID);
@@ -88,7 +97,12 @@ export default function SubjectCard({
         >
           Delete
         </button>
+
       </main>
+      {
+        edit ? <EditModal></EditModal> : <span></span>
+      }
+
       {showAssignments ? (
         <AddAssignments
           key={subjectID}
