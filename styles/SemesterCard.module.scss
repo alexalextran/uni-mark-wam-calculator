@@ -1,6 +1,7 @@
 @import "variables&functions";
 
 .main{
+    position: relative;
     background-color: $white;
     width: 75%;
     margin: 0 auto;
@@ -8,6 +9,7 @@
     margin-top: 8em;
     border-radius: 2em;
     box-shadow: 0.2em 0.2em 0.6em 0.2em #a8a5a5;
+    z-index: 1;
     h1{
         text-align: center;
         padding-top: 0.7em;
@@ -23,7 +25,12 @@
         padding-bottom: 1em;
     }
 
-
+.exitbutton{
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    font-size: 0.7em;
+}
 
 
 .form{

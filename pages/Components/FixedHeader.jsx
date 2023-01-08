@@ -14,7 +14,7 @@ const { logout, addSemester, wam } = useAuth()
     <span>
         <button onClick={() => {
             logout();
-        }}>signout</button>
+        }}>Signout</button>
         
         <button onClick={() => {
                         addSemester();

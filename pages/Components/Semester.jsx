@@ -3,6 +3,9 @@ import { useAuth } from "../../context/AuthContext";
 import { collection, onSnapshot } from "firebase/firestore";
 import styles from "../../styles/SemesterCard.module.scss";
 import SubjectCard from "./SubjectCard";
+import { RxCross1 } from 'react-icons/Rx';
+import ConfirmationModal from "./ConfirmationModal.jsx";
+
 export default function Semester({ semesterNO, db }) {
   const [SubjectName, setSubjectName] = useState("");
   const [Credits, setCredits] = useState(0);
@@ -10,6 +13,7 @@ export default function Semester({ semesterNO, db }) {
   const { user, addSubject, wam, totalcredits } = useAuth();
   const [subjects, setsubjects] = useState([]);
   const [loading, setloading] = useState(true);
+  const [confirm, setconfirm] = useState(true)
 
   useEffect(() => {
     if (user) {
@@ -48,15 +52,18 @@ export default function Semester({ semesterNO, db }) {
       {loading ? (
         loading
       ) : (
-        <main className={styles.main}>
-          <h1>Semester {semesterNO}</h1>
+
+        (confirm ? <ConfirmationModal/> : "lol")
+        
+        ,<main className={styles.main}>
+          <h1>Semester {semesterNO} <span className={styles.exitbutton}><RxCross1 onClick={() => setconfirm(true)}/></span></h1>
           {
             <p className={styles.wam}>
-              Impact on wam for this semester:
+              Impact on wam for this semester: 
               <span style={{ color: wamImpact > 0 ? "green" : "red" }}>
                 {totalcredits - allcredits == 0
                   ? allmarks / subjects.length
-                  : wamImpact}
+                  : " " + wamImpact}
               </span>
             </p>
           }
@@ -115,6 +122,7 @@ export default function Semester({ semesterNO, db }) {
           </form>
         </main>
       )}
+    
     </>
   );
 }
