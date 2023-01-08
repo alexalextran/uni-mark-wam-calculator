@@ -1,10 +1,14 @@
 import React from 'react';
+import styles from "../../styles/ConfirmationModal.module.scss";
 
-const ConfirmationModal = () => {
+const ConfirmationModal = ({setconfirm, semesterNO}) => {
     return (
-        <div>
-            Are you sure you want to delete this semester?
-        </div>
+        <main className={styles.main}>
+           <div><h3>Are you sure you want to delete semester {semesterNO}?</h3>
+           <span><button onClick={() => {setconfirm(false)}}>No</button>
+           <button>Yes</button></span>
+           </div> 
+        </main>
     );
 }
 

@@ -1,0 +1,53 @@
+@import "variables&functions";
+
+.main{
+    z-index: 1001;
+    background-color: rgba(0,0,0,0.9);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    div{
+        border-radius: 1em;
+        @include absolutecenter;
+        opacity: 1 !important;
+        background-color: white;
+        width: 35em;
+        height: 12em;
+        @include flexCenter(column);
+        color: black;
+
+        h3{
+            height: 80%;
+            text-align: center;
+            @include flexCenter(row);
+        }
+
+        span{
+            width: 100%;
+            height: max-content;
+        }
+        button{
+            width: 50%;
+            height: 4em;
+            border: none;
+            transform: translateY(0.1em);
+            color: white;
+            transition: all 500ms;
+            &:nth-child(1){
+                border-radius: 0 0 0 1em;
+                background-color: rgb(56,56,56);
+            }
+            &:nth-child(2){
+                border-radius: 0 0 1em 0;
+                background-color: rgb(14,97,254);
+            }
+            &:hover{
+             opacity: 0.5;
+            }
+        }
+    }
+}
