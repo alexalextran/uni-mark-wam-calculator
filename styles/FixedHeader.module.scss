@@ -1,0 +1,15 @@
+@import "variables&functions";
+
+
+.main{
+    color: white;
+    background-color: rgba(black, 0.7);
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    @include flexCenter(column);
+
+    .orange{
+        color: $orange;
+      }
+}

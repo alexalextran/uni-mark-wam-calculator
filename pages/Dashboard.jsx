@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../context/AuthContext'
 import { collection, onSnapshot, getFirestore } from "firebase/firestore";
 import Semester from './Components/Semester';
+import FixedHeader from './Components/FixedHeader';
 
 export default function Dashboard() {
   const { user, logout, addSemester, calulateWAM, wam } = useAuth()
@@ -36,16 +37,9 @@ export default function Dashboard() {
 
   return (
     <div>
-      <button onClick={() => {
-        logout()
-      }}>signout</button>
-
-      <button onClick={() => {
-        addSemester()
-      }}>Add Semester</button>
 
       {
-        loading ? <p>Loading</p> : <p>wam {wam}</p>
+        loading ? <p>Loading</p> : <FixedHeader/>
       }
 
       {
