@@ -3,6 +3,7 @@
 
 
 .main{
+    z-index: 1000;
     background-color: rgba(0,0,0,0.9);
     width: 100vw;
     height: 100vh;
@@ -12,16 +13,14 @@
     transform: translate(-50%, 50%);
 
    .modal{
-    border-radius: 2em;
+    border-radius: 1em;
     @include absolutecenter;
     opacity: 1 !important;
     background-color: white;
-    
-    width: 45em;
-    height: 15em;
+    width: 35em;
+    height: 12em;
     @include flexCenter(column);
     & > *{
-    border-radius: inherit;
     width: 100%;
   
     }
@@ -38,6 +37,7 @@
         border: none;
         transform: translateY(0.1em);
         color: white;
+        transition: all 500ms;
         &:nth-child(1){
             border-radius: 0 0 0 1em;
             background-color: rgb(56,56,56);
@@ -46,19 +46,31 @@
             border-radius: 0 0 1em 0;
             background-color: rgb(14,97,254);
         }
+        &:hover{
+         opacity: 0.5;
+        }
     }
 
     form{
         @include flexCenter(row);
-        height: 80%;
+        height: 30%;
         span{
+            height: fit-content;
             text-align: center;
             margin: 2em;
+            margin-top: 7em;
             input{
                 text-align: center;    
                 @include input;
             }
         }
+    }
+    p{
+        margin-top: 7em;
+        display: none;
+       font-size: 0.6em;
+       text-align: center;
+      
     }
 } 
 }
