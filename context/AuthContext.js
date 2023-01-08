@@ -94,6 +94,13 @@ export const AuthContextProvider = ({
     }
 
     const deleteSubject = async (semesterNO, subjectID) => {
+      const q = query(collectionGroup(db, "Assignments"), where("SubjectID", "==",  `${subjectID}`));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach(async (document) => {
+        await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID, "Assignments", document.id));
+    });
+
+
       await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID));
 
       calulateWAM()
