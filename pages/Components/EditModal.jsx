@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "../../styles/EditModal.module.scss";
+import { useAuth } from "../../context/AuthContext";
 
-const EditModal = ({setedit, Name, credits}) => {
+const EditModal = ({setedit, Name, credits, semesterNO, subjectID}) => {
+    const [nameInput, setnameInput] = useState(Name)
+    const [creditsInput, setcreditsInput] = useState(credits)
+    const {modalchange } = useAuth();
     return (
         <main className={styles.main}>
             <div className={styles.modal}>
@@ -10,12 +14,12 @@ const EditModal = ({setedit, Name, credits}) => {
 
                  <span>
                     <h3>Name</h3>
-                    <input defaultValue={Name}></input>
+                    <input onChange={(e) => setnameInput(e.target.value)} defaultValue={Name}></input>
                  </span>
 
                  <span>
                     <h3>Credits</h3>
-                    <input defaultValue={credits}></input>
+                    <input onChange={(e) => setcreditsInput(e.target.value)} defaultValue={credits}></input>
                  </span>
 
                
@@ -26,7 +30,10 @@ const EditModal = ({setedit, Name, credits}) => {
             </div>
             <span>
                <button onClick={() => setedit(false)}>Cancel</button>
-               <button>Submit</button> 
+               <button onClick={() => {
+                modalchange(nameInput, creditsInput.toString(), semesterNO,  subjectID)
+                setedit(false)
+               }}>Submit</button> 
             </span>
             
                 </div>

@@ -100,7 +100,7 @@ export default function SubjectCard({
 
       </main>
       {
-        edit ? <EditModal setedit={setedit} credits={credits} Name={Name}></EditModal> : <span></span>
+        edit ? <EditModal semesterNO={semesterNO} subjectID={subjectID} setedit={setedit} credits={credits} Name={Name}></EditModal> : <span></span>
       }
 
       {showAssignments ? (

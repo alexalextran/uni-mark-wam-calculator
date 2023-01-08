@@ -149,7 +149,12 @@ export const AuthContextProvider = ({
       calulateWAM()
       }
 
-  
+  const modalchange = async (nameinput, creditinput, semesterNO, subjectID) => {
+    await updateDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subjectID), {
+      Credits: creditinput,
+      Name: nameinput,
+    })
+  }
 
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -165,7 +170,7 @@ export const AuthContextProvider = ({
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam, deleteSubject, totalcredits}}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam, deleteSubject, totalcredits, modalchange}}>
       {loading ? null : children}
     </AuthContext.Provider>
   )
