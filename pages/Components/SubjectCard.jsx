@@ -64,15 +64,38 @@ export default function SubjectCard({
     });
   }
 
+  const grading = (mark) => {
+    
+    switch (true) {
+  case mark.Mark < 50:
+     return "Fail"
+      
+  case mark.Mark < 65:
+     return "Pass"
+      
+  case mark.Mark < 75:
+     return "Credit"
+       
+  case mark.Mark < 85:
+     return "Distinction"
+    
+    default:
+    return "Distinction"
+   
+}   
+  }
+
   return (
     <>
       <main className={styles.main}>
         <h3>{Name}</h3>
         <p>Credits {credits}</p>
         <p>Mark {Mark}</p>
+        <p>{grading({Mark})}</p>
         <p style={{ color: wamImpact > 0 ? "green" : "red" }}>
           {totalcredits - credits == 0 ? Mark : wamImpact}
         </p>
+     
 
         <button
           onClick={() => {
