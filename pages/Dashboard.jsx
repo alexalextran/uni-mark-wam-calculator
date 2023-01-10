@@ -31,7 +31,6 @@ export default function Dashboard() {
 
 
     }
-    console.log(wam)
   }, [user])
 
 
@@ -44,7 +43,13 @@ export default function Dashboard() {
 
       {
         loading ? <p>Loading</p> : semesters.map((semester) => {
-          return <Semester key={semester.ID} semesterNO={semester.semesterNO} db={db}>  </Semester>
+          var lastindex = false
+         
+          if(+semester.semesterNO == +semesters.length){
+            lastindex = true
+          }
+
+          return <Semester key={semester.ID} lastindex={lastindex} semesterNO={semester.semesterNO} db={db}>  </Semester>
         })
 
       }

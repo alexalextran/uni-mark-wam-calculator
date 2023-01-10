@@ -6,7 +6,7 @@ import SubjectCard from "./SubjectCard";
 import { RxCross1 } from 'react-icons/Rx';
 import ConfirmationModal from "./ConfirmationModal.jsx";
 
-export default function Semester({ semesterNO, db }) {
+export default function Semester({ semesterNO, db, lastindex }) {
   const [SubjectName, setSubjectName] = useState("");
   const [Credits, setCredits] = useState(0);
   const [Mark, setMark] = useState(0);
@@ -46,7 +46,6 @@ export default function Semester({ semesterNO, db }) {
     (wam * totalcredits - (allmarks / subjects.length) * allcredits) /
       (totalcredits - allcredits)
   ).toFixed(3);
-
   return (
     <>
       {loading ? (
@@ -57,7 +56,7 @@ export default function Semester({ semesterNO, db }) {
            {confirm ? <ConfirmationModal semesterNO={semesterNO} setconfirm={setconfirm}/> : ""}
          
          <main className={styles.main}>
-            <h1>Semester {semesterNO} <span className={styles.exitbutton}><RxCross1 onClick={() => setconfirm(true)} /></span></h1>
+            <h1>Semester {semesterNO}{ lastindex ? <span className={styles.exitbutton}><RxCross1 onClick={() => setconfirm(true)} /></span> : <span></span>}</h1>
             {<p className={styles.wam}>
               Impact on wam for this semester:
               <span style={{ color: wamImpact > 0 ? "green" : "red" }}>

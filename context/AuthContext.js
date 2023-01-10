@@ -123,6 +123,29 @@ export const AuthContextProvider = ({
       calulateWAM()
       }
 
+      const deleteSemester = async (semesterNO) => {
+
+        //get all subjets within this semester
+        const q = query(collectionGroup(db, "Subjects"), where("semesterNO", "==",  `${semesterNO}`));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(async (subject) => {
+        //for each subject get all assignments that relate to that subject
+
+          const q1 = query(collectionGroup(db, "Assignments"), where("SubjectID", "==",  `${subject.id}`));
+          const querySnapshot1 = await getDocs(q1);
+
+          querySnapshot1.forEach(async (assigment) => { //for each assignment delete that corresponding assignment
+            await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subject.id, "Assignments", assigment.id));
+          })
+          
+          //delete the subject after all assignmetns are deleted
+          await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO), "Subjects", subject.id));
+      });
+
+        //delete the semester after all subjects are deleted
+        await deleteDoc(doc(db, user.uid, ('Semester ' + semesterNO)));
+      }
+
     const addAssignment = async (semesterNO, subjectName, subjectID, weighting, Asname, Mark, Index) => {
       try {
 
@@ -177,7 +200,7 @@ export const AuthContextProvider = ({
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam, deleteSubject, totalcredits, modalchange}}>
+    <AuthContext.Provider value={{ user, login, signup, logout, addSemester, addSubject, addAssignment, deleteAssignment, Contextsubjects, setContextsubjects, Contextassignments, setContextassignments, calulateWAM, wam, deleteSubject, totalcredits, modalchange, deleteSemester}}>
       {loading ? null : children}
     </AuthContext.Provider>
   )
