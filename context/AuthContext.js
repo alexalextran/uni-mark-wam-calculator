@@ -125,8 +125,8 @@ export const AuthContextProvider = ({
 
       const deleteSemester = async (semesterNO) => {
 
-        //get all subjets within this semester
-        const q = query(collectionGroup(db, "Subjects"), where("semesterNO", "==",  `${semesterNO}`));
+        //get all subjects within this semester
+        const q = query(collectionGroup(db, "Subjects"), where("semesterNO", "==",  semesterNO));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(async (subject) => {
         //for each subject get all assignments that relate to that subject
