@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAuth } from '../../context/AuthContext'
 import styles from "../../styles/FixedHeader.module.scss";
 
@@ -10,6 +10,19 @@ const { logout, addSemester, wam } = useAuth()
 
     return (
         <div className={styles.main}>
+
+    
+       
+        <ul>
+            <span>
+            <li>Fail 0 - 49</li>
+            <li>Pass 50 - 64</li>
+            <li>Credit 65 - 74</li>
+            <li>Disctinction 75 - 84</li>
+            <li>High Distinction: 85+</li>
+            </span>
+        </ul>
+    
 
     <span>
         <button onClick={() => {

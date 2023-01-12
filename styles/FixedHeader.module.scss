@@ -10,6 +10,25 @@
     @include flexCenter(column);
     z-index: 1000;
 
+    ul{
+        position: absolute;
+        left: 0;
+        width: 30%;
+        height: 100%;
+        display: flex;
+        @include flexCustom(space-between, center, row);
+        span{
+            width: 100%;
+            height: 50%;
+            display: flex;
+            flex-wrap: wrap;
+            li{
+                margin-right: 4em;
+               list-style-type: none 
+            }
+        }
+    }
+
     button{
         @include button;
         padding: 0.8em;
