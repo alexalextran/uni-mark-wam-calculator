@@ -73,7 +73,11 @@ export default function AddAssignment({
           <input
             name="Weighting"
             required
-            onChange={(e) => setweigthing(e.target.value)}
+            onChange={(e) =>   isNaN(e.target.value)
+              ? (
+                alert("Weigthing must only be a numeric value"),  e.target.value = ""
+              )
+              : setweigthing(e.target.value)}
           ></input>
         </span>
 
@@ -82,13 +86,21 @@ export default function AddAssignment({
           <input
             name="Mark"
             required
-            onChange={(e) => setMark(e.target.value)}
+            onChange={(e) => isNaN(e.target.value)
+              ? (
+                alert("Mark must only be a numeric value"),  e.target.value = ""
+              )
+              : setMark(e.target.value)}
           ></input>
           /
           <input
             name="OutOf"
             required
-            onChange={(e) => setOutOf(e.target.value)}
+            onChange={(e) =>  isNaN(e.target.value)
+              ? (
+                alert("Mark must only be a numeric value"),  e.target.value = ""
+              )
+              : setOutOf(e.target.value)}
           ></input>
         </span>
 

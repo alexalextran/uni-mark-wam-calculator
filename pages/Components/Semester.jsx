@@ -8,7 +8,7 @@ import ConfirmationModal from "./ConfirmationModal.jsx";
 
 export default function Semester({ semesterNO, db, lastindex }) {
   const [SubjectName, setSubjectName] = useState("");
-  const [Credits, setCredits] = useState(0);
+  const [Credits, setCredits] = useState(6);
   const [Mark, setMark] = useState(0);
   const { user, addSubject, wam, totalcredits } = useAuth();
   const [subjects, setsubjects] = useState([]);
@@ -102,8 +102,16 @@ export default function Semester({ semesterNO, db, lastindex }) {
                 <p>Mark</p>
                 <input
                   name="Mark"
-                  required
-                  onChange={(e) => setMark(e.target.value)}
+                  onChange={(e) => 
+                    { 
+                      isNaN(e.target.value)
+                      ? (
+                        alert("Mark must only be a numeric value"),  e.target.value = ""
+                      )
+                      : setMark(e.target.value)
+                    }
+                }
+                    
                 ></input>
               </span>
 
@@ -111,8 +119,13 @@ export default function Semester({ semesterNO, db, lastindex }) {
                 <p>Credits</p>
                 <input
                   name="Credits"
-                  required
-                  onChange={(e) => setCredits(e.target.value)}
+                  onChange={(e) =>{
+                    isNaN(e.target.value)
+                      ? (
+                        alert("Credit must only be a numeric value"),  e.target.value = ""
+                      )
+                      : setCredits(e.target.value)
+                  }}
                 ></input>
               </span>
 
