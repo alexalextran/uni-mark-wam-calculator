@@ -19,7 +19,7 @@ const Login = ({handleOnClick, titlesize}) => {
 
   return (
     <main className={styles.main}>
-      <form onSubmit={handleLogin}>
+      <form >
         <h1>Login</h1>
         <p>Email</p>
         <input
@@ -38,7 +38,9 @@ const Login = ({handleOnClick, titlesize}) => {
         ></input>
         <br></br>
         <span>
-           <button>Login</button>
+           <button onClick={(e) => {
+           handleLogin(e)
+           }}>Login</button>
         <button onClick={() => {
           handleOnClick(titlesize/4)
         }}> Don&#39;t have an account?</button>

@@ -33,8 +33,6 @@ export default function Semester({ semesterNO, db, lastindex }) {
     }
   }, [user]);
 
-  console.log("i am heheheheh")
-
   let allmarks = 0;
   let allcredits = 0;
 

@@ -21,7 +21,7 @@ let columns = Math.floor(width/50)
 let tilesize = new Array(columns*rows).fill(0)
 
     useEffect(() => {
-        (user) ? router.push('/Dashboard') : console.log("User has already logged in")
+        (user) ? router.push('/Dashboard') : console.log("User has not logged in")
       }, [user])
 
 const handleOnClick = index => {

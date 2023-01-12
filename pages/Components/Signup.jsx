@@ -22,7 +22,7 @@ export default function Signup({handleOnClick, titlesize}) {
   return (
 
     <main className={styles.main}>
-    <form onSubmit={handleSignup}>
+    <form>
         <h1>Sign Up</h1>
         <p>Email</p>
         <input name="email" required value={email} onChange={e => setemail(e.target.value)}></input>
@@ -30,10 +30,15 @@ export default function Signup({handleOnClick, titlesize}) {
         <input name="password" required type="password" value={password} onChange={e => setpassword(e.target.value)}></input>
         <br></br>
         <span>
-           <button>Sign up</button>
+
+           <button onClick={(e) => {
+            handleSignup(e)
+           }}>Sign up</button>
+
         <button onClick={() => {
             handleOnClick(titlesize/4)
         }}>Already have an account?</button>
+        
         </span>
        
     </form>
