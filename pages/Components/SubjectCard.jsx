@@ -30,6 +30,9 @@ export default function SubjectCard({
   const customMark = useRef();
   const [edit, setedit] = useState(false);
 
+
+  
+
   useEffect(() => {
     onSnapshot(
       collection(

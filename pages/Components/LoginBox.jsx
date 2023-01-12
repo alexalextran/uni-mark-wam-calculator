@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../styles/LoginCard.module.scss";
 import { useAuth } from '../../context/AuthContext'
-const Login = () => {
+const Login = ({handleOnClick, titlesize}) => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [loading, setloading] = useState(false);
@@ -39,7 +39,9 @@ const Login = () => {
         <br></br>
         <span>
            <button>Login</button>
-        <button> Don&#39;t have an account?</button>
+        <button onClick={() => {
+          handleOnClick(titlesize/4)
+        }}> Don&#39;t have an account?</button>
         </span>
       </form>
     </main>

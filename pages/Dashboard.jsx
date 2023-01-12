@@ -15,7 +15,8 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    (!user) ? router.push('/Login') : console.log("User logged in")
+    
+    (!user) ? router.push('/') : console.log("User logged in")
     if (user) {
       calulateWAM()
       onSnapshot(collection(db, user.uid), (snapshot) => {

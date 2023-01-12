@@ -33,6 +33,8 @@ export default function Semester({ semesterNO, db, lastindex }) {
     }
   }, [user]);
 
+  console.log("i am heheheheh")
+
   let allmarks = 0;
   let allcredits = 0;
 
@@ -49,7 +51,7 @@ export default function Semester({ semesterNO, db, lastindex }) {
   return (
     <>
       {loading ? (
-        loading
+        <span></span>
       ) : (
 
          <>
@@ -60,9 +62,9 @@ export default function Semester({ semesterNO, db, lastindex }) {
             {<p className={styles.wam}>
               Impact on wam for this semester:
               <span style={{ color: wamImpact > 0 ? "green" : "red" }}>
-                {totalcredits - allcredits == 0
+              { " "} {totalcredits - allcredits == 0
                   ? allmarks / subjects.length
-                  : " " + wamImpact}
+                  : + wamImpact} 
               </span>
             </p>}
 

@@ -18,11 +18,10 @@ export default function Index() {
     
 let rows = Math.floor(height/50)
 let columns = Math.floor(width/50)
-console.log(columns, rows)
 let tilesize = new Array(columns*rows).fill(0)
 
     useEffect(() => {
-        (user) ? router.push('/Dashboard') : console.log("User has not logged in")
+        (user) ? router.push('/Dashboard') : console.log("User has already logged in")
       }, [user])
 
 const handleOnClick = index => {
@@ -61,7 +60,7 @@ const handleOnClick = index => {
     }
 
       {
-        toggleLogIn ? <LoginBox/> : <Signup/>
+        toggleLogIn ? <LoginBox handleOnClick={handleOnClick} titlesize={tilesize.length}/> : <Signup handleOnClick={handleOnClick} titlesize={tilesize.length}/>
       }
     </div>
       </div>

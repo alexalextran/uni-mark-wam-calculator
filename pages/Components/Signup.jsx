@@ -1,7 +1,7 @@
 import React, {useState } from 'react'
 import styles from "../../styles/LoginCard.module.scss";
 
-export default function Signup() {
+export default function Signup({handleOnClick, titlesize}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [error, setError] = useState(null);
@@ -31,7 +31,9 @@ export default function Signup() {
         <br></br>
         <span>
            <button>Sign up</button>
-        <button>Already have an account?</button>
+        <button onClick={() => {
+            handleOnClick(titlesize/4)
+        }}>Already have an account?</button>
         </span>
        
     </form>
