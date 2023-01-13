@@ -1,15 +1,16 @@
 import React, {useState } from 'react'
 import styles from "../../styles/LoginCard.module.scss";
-
+import { useAuth } from '../../context/AuthContext'
 export default function Signup({handleOnClick, titlesize}) {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [error, setError] = useState(null);
-
+    const { signup } = useAuth()
 
  
      const handleSignup = async (e) => {
           e.preventDefault()
+          console.log("nice")
           try {
             await signup(email, password)
           } catch (err) {

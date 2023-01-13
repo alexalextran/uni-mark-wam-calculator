@@ -5,7 +5,7 @@ import styles from "../../styles/FixedHeader.module.scss";
 
 const FixedHeader = () => {
     
-const { logout, addSemester, wam } = useAuth()
+const { logout, addSemester, wam, user } = useAuth()
 
 
     return (
@@ -22,6 +22,10 @@ const { logout, addSemester, wam } = useAuth()
             <li>High Distinction: 85+</li>
             </span>
         </ul>
+
+        <span className={styles.userinfo}>
+            <p>Current User: <span>{user.email}</span></p>
+        </span>
     
 
     <span>

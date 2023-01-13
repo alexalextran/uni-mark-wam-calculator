@@ -83,7 +83,7 @@ export default function SubjectCard({
      return "Distinction"
     
     default:
-    return "Distinction"
+    return "High Distinction"
    
 }   
   }
