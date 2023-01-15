@@ -14,7 +14,7 @@ export default function Signup({handleOnClick, titlesize}) {
           try {
             await signup(email, password)
           } catch (err) {
-            console.log(err)
+            alert(err.message)
           }
         }
     

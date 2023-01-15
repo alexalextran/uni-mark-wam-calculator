@@ -13,7 +13,7 @@ const Login = ({handleOnClick, titlesize}) => {
     try {
       await login(email, password);
     } catch (err) {
-      console.log(err);
+      alert(err.message)
     }
   };
 
