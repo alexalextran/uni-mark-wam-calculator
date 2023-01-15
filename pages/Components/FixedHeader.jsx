@@ -24,7 +24,7 @@ const { logout, addSemester, wam, user } = useAuth()
         </ul>
 
         <span className={styles.userinfo}>
-            <p>Current User: <span>{user.email}</span></p>
+            <p>Current User: <span>{user?.email}</span></p>
         </span>
     
 

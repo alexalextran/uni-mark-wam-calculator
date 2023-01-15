@@ -7,7 +7,7 @@
     display: grid;
     margin: 0 auto;
     text-align: center;
-    grid-template-columns:  repeat(5, 1fr) 0.66fr 0.66fr 0.66fr;
+    grid-template-columns: 2fr repeat(2, 1fr) 0.5fr 1fr repeat(3, 0.66fr);
     column-gap: 1em;
     
     :nth-child(1){
@@ -19,6 +19,7 @@
     }
 
     button{
+        transition: background-Color 300ms ease;
         @include button
     }
 
@@ -34,3 +35,12 @@
         @include flexCustom(space-around, center, row);
     }
 }
+
+@media all and (max-width: 550px) {
+    .main{
+   font-size: 2vw;
+   width: 95%;
+        
+    }
+    
+   }

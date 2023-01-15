@@ -17,6 +17,8 @@ export default function SubjectCard({
   subjectID,
   Mark,
 }) {
+  
+  
 
 
   const { user, deleteSubject, wam, totalcredits } = useAuth();
@@ -71,19 +73,19 @@ export default function SubjectCard({
     
     switch (true) {
   case mark.Mark < 50:
-     return "Fail"
+     return "F"
       
   case mark.Mark < 65:
-     return "Pass"
+     return "P"
       
   case mark.Mark < 75:
-     return "Credit"
+     return "C"
        
   case mark.Mark < 85:
-     return "Distinction"
+     return "D"
     
     default:
-    return "High Distinction"
+    return "HD"
    
 }   
   }
@@ -100,7 +102,7 @@ export default function SubjectCard({
         </p>
      
 
-        <button
+        <button style={{ backgroundColor: showAssignments ? "rgba(255,92,53, .7)" : "" }}
           onClick={() => {
             setshowAssignments(!showAssignments);
           }}

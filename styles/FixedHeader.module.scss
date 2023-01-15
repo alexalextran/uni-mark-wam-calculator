@@ -50,3 +50,18 @@
         color: $orange;
       }
 }
+
+
+@media all and (max-width: 550px) {
+    .main{
+     font-size: 2vw;
+     width: 100%;
+     ul{
+        display: none;
+       }
+    }
+   .userinfo{
+    display: none;
+   }
+
+   }

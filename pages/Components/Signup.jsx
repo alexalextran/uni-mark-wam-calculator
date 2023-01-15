@@ -37,7 +37,7 @@ export default function Signup({handleOnClick, titlesize}) {
            }}>Sign up</button>
 
         <button onClick={() => {
-            handleOnClick(titlesize/4)
+              handleOnClick((Math.floor(Math.random() * titlesize)))
         }}>Already have an account?</button>
         
         </span>

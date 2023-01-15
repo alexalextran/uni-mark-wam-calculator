@@ -17,6 +17,7 @@ const Login = ({handleOnClick, titlesize}) => {
     }
   };
 
+
   return (
     <main className={styles.main}>
       <form >
@@ -42,7 +43,7 @@ const Login = ({handleOnClick, titlesize}) => {
            handleLogin(e)
            }}>Login</button>
         <button onClick={() => {
-          handleOnClick(titlesize/4)
+          handleOnClick((Math.floor(Math.random() * titlesize)))
         }}> Don&#39;t have an account?</button>
         </span>
       </form>
