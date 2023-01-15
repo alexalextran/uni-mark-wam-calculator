@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { collection, onSnapshot } from "firebase/firestore";
 import styles from "../../styles/SemesterCard.module.scss";
 import SubjectCard from "./SubjectCard";
-import { RxCross1 } from 'react-icons/Rx';
+import { RxCross1 } from 'react-icons/rx';
 import ConfirmationModal from "./ConfirmationModal.jsx";
 
 export default function Semester({ semesterNO, db, lastindex }) {
