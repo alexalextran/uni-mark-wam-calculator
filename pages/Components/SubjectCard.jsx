@@ -36,7 +36,7 @@ export default function SubjectCard({
   
 
   useEffect(() => {
-    onSnapshot(
+    let unsubscribe = onSnapshot(
       collection(
         db,
         user.uid,
@@ -54,6 +54,7 @@ export default function SubjectCard({
         );
       }
     );
+    return () => unsubscribe()
   }, []);
 
   if (customMark.current != undefined) {

@@ -16,10 +16,15 @@ export default function Dashboard() {
 
   useEffect(() => {
     
-    (!user) ? router.push('/') : console.log("User logged in")
-    if (user) {
+    if(!user) router.push('/')
+
+  
       calulateWAM()
-      onSnapshot(collection(db, user.uid), (snapshot) => {
+      var unsubscribe = () => {}
+
+
+      try {
+        unsubscribe = onSnapshot(collection(db, user.uid), (snapshot) => {
         setsemesters(snapshot.docs.map(doc => ({
           //generate array and populate with id and doc data
           ID: doc.id,
@@ -28,10 +33,14 @@ export default function Dashboard() {
 
         setloading(false)
       })
-
-
-
     }
+    catch{
+      
+    }
+
+
+      return () => unsubscribe()
+    
   }, [user])
 
 
@@ -43,7 +52,7 @@ export default function Dashboard() {
       }
 
       {
-        loading ? <p>Loading</p> : semesters.map((semester) => {
+        loading && !user ? <p>Loading</p> : semesters.map((semester) => {
           var lastindex = false
          
           if(+semester.semesterNO == +semesters.length){

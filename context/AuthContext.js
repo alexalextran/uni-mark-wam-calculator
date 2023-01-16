@@ -44,6 +44,9 @@ export const AuthContextProvider = ({
 
 
   const calulateWAM =  async () => {
+    if(user){
+
+   
     const q = query(collectionGroup(db, "Subjects"), where("UID", "==",  `${user.uid}`));
     const querySnapshot = await getDocs(q);
     let totalmarks = 0
@@ -57,6 +60,7 @@ export const AuthContextProvider = ({
       settotalcredits(totalcredits)
       setwam((totalmarks/totalcredits).toFixed(2))
   }
+}
 
    const addSemester = async () => {
   let semsters = await getDocs(collection(db, user.uid));

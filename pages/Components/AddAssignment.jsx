@@ -15,6 +15,7 @@ export default function AddAssignment({
   const [OutOf, setOutOf] = useState();
   const { addAssignment } = useAuth();
 
+  //react spring animations for each assignment
   const trans = useSpring({
     from: { y: -50, opacity: 0},
     to: { y: 0, opacity: 1},
@@ -24,22 +25,20 @@ export default function AddAssignment({
   return (
     
     <main>
-      {Assignments.sort(
+      {Assignments.sort( //sort by assigmnet index(order they were created)
         (a, b) => parseFloat(a.Index) - parseFloat(b.Index)
       ).map((Assignment, index) => {
         return (
-          <>
             <AssignmentCard
               index={index}
               key={Assignment.ID}
               asID={Assignment.ID}
               Assignment={Assignment}
-            >
-              {" "}
+            > 
             </AssignmentCard>
-          </>
         );
       })}
+      
     <animated.div style={trans}>
       <form
         className={styles.form}

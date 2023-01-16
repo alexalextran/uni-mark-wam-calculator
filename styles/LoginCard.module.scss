@@ -6,6 +6,8 @@
   position: absolute;
   @include absolutecenter;
    form{
+    max-width: 2000px;
+    max-height: 2000px;
     display: inline-block;
     background: rgba(255, 255, 255, 0.48);
     border-radius: 1em;
@@ -56,4 +58,13 @@
      font-size: 3vw !important;
     }
   
+   }
+
+   @media all and (min-width: 2000px)  {
+   .main{
+    form{
+        font-size: 30px;    
+    }
+  
+   }
    }

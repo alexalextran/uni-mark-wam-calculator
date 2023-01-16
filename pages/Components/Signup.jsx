@@ -10,7 +10,6 @@ export default function Signup({handleOnClick, titlesize}) {
  
      const handleSignup = async (e) => {
           e.preventDefault()
-          console.log("nice")
           try {
             await signup(email, password)
           } catch (err) {

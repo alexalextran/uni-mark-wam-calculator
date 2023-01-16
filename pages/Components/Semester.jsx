@@ -5,6 +5,7 @@ import styles from "../../styles/SemesterCard.module.scss";
 import SubjectCard from "./SubjectCard";
 import { RxCross1 } from 'react-icons/rx';
 import ConfirmationModal from "./ConfirmationModal.jsx";
+import { useRouter } from 'next/router';
 
 export default function Semester({ semesterNO, db, lastindex }) {
   const [SubjectName, setSubjectName] = useState("");
@@ -14,9 +15,16 @@ export default function Semester({ semesterNO, db, lastindex }) {
   const [subjects, setsubjects] = useState([]);
   const [loading, setloading] = useState(true);
   const [confirm, setconfirm] = useState(false)
+  const router = useRouter();
 
   useEffect(() => {
-    if (user) {
+
+    if(!user) router.push('/')
+var unsubscribe = () => {}
+
+
+   try {
+      unsubscribe = 
       onSnapshot(
         collection(db, user.uid, "Semester " + semesterNO, "Subjects"),
         (snapshot) => {
@@ -29,27 +37,28 @@ export default function Semester({ semesterNO, db, lastindex }) {
           );
           setloading(false);
         }
-      );
-    }
+      );}
+      catch (error) {
+    
+      }
+    
+    return () => unsubscribe()
   }, [user]);
 
   let allmarks = 0;
   let allcredits = 0;
-
+  //calcuate total mark and credits
   subjects.forEach((subject) => {
     allmarks += subject.Mark;
     allcredits += +subject.Credits;
   });
 
-  var wamImpact = (
-    wam -
-    (wam * totalcredits - (allmarks / subjects.length) * allcredits) /
-      (totalcredits - allcredits)
-  ).toFixed(3);
+  var wamImpact = ( //formula for calulating wam impact for each semester
+    wam - (wam * totalcredits - (allmarks / subjects.length) * allcredits) / (totalcredits - allcredits)).toFixed(3);
   return (
     <>
       {loading ? (
-        <span></span>
+        <span>Loading</span>
       ) : (
 
          <>

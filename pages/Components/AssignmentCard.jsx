@@ -24,8 +24,8 @@ const AssignmentCard = ({ Assignment, asID, index }) => {
       <p>Weighting: {Assignment.Weighting}%</p>
 
       <p>
-        Mark - total grade{" "}
-        {((Assignment.Mark / 100) * (Assignment.Weighting / 100) * 100).toFixed(
+        Mark - total grade{" "} 
+        {((Assignment.Mark / 100) * (Assignment.Weighting / 100) * 100).toFixed( //formula for calculating wam impact
           1
         )}
         %

@@ -21,7 +21,7 @@ let columns = Math.floor(width/50)
 let tilesize = new Array(columns*rows).fill(0)
 
     useEffect(() => {
-        (user) ? router.push('/Dashboard') : console.log("User has not logged in")
+        if(user) router.push('/Dashboard')
       }, [user])
 
 const handleOnClick = index => {
@@ -47,13 +47,12 @@ const handleOnClick = index => {
 
       tilesize.map((bruh, index) => {
         return ( (
-          <>
+        
         
           <div
-            key={index} id="tiles" className={styles.tiles} onClick={() => { handleOnClick(index); } }>
+             id="tiles" key={index} className={styles.tiles} onClick={() => { handleOnClick(index); } }>
           </div>
-        
-          </>
+      
         
         ))
       })
