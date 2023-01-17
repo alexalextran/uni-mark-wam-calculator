@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { collection, onSnapshot, getFirestore } from "firebase/firestore";
 import Semester from './Components/Semester';
 import FixedHeader from './Components/FixedHeader';
+import Head from 'next/head'
 
 export default function Dashboard() {
   const { user, logout, addSemester, calulateWAM, wam } = useAuth()
@@ -46,6 +47,14 @@ export default function Dashboard() {
 
   return (
     <div>
+
+      <Head>
+        <title>Wam&Mark Calulator🤔</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/logofav.png" />
+        <meta name="description" content="A online calulator which is used to calulate your Weighted average mark"></meta>
+      </Head>
 
       {
         loading ? <p>Loading</p> : <FixedHeader/>

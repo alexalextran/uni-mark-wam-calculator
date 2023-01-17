@@ -23,7 +23,8 @@ export default function Signup({handleOnClick, titlesize}) {
 
     <main className={styles.main}>
     <form>
-        <h1>Sign Up</h1>
+    <h2>Uni Wam & Mark calulator</h2>
+        <h2>Sign Up</h2>
         <p>Email</p>
         <input name="email" required value={email} onChange={e => setemail(e.target.value)}></input>
         <p>Password</p>

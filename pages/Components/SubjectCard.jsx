@@ -96,7 +96,7 @@ export default function SubjectCard({
       <main className={styles.main}>
         <h3>{Name}</h3>
         <p>Credits {credits}</p>
-        <p>Mark {Mark}</p>
+        <p>Mark {Mark.toFixed()}</p>
         <p>{grading({Mark})}</p>
         <p style={{ color: wamImpact > 0 ? "green" : "red" }}>
           {totalcredits - credits == 0 ? Mark : wamImpact}

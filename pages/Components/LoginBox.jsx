@@ -21,7 +21,8 @@ const Login = ({handleOnClick, titlesize}) => {
   return (
     <main className={styles.main}>
       <form >
-        <h1>Login</h1>
+        <h2>Uni Wam & Mark calulator</h2>
+        <h2>Login</h2>
         <p>Email</p>
         <input
           name="email"

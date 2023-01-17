@@ -6,6 +6,7 @@ import LoginBox from './Components/LoginBox';
 import styles from "../styles/IndexBG.module.scss";
 import useWindowDimensions from '../Hooks/useWindowDimensions';
 import anime from 'animejs';
+import Head from 'next/head'
 
 export default function Index() {
 
@@ -39,6 +40,13 @@ const handleOnClick = index => {
 
   return (
     <main className={styles.mainwrapper}>
+       <Head>
+        <title>Wam-Mark-Calulator🤔</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link rel="shortcut icon" href="/logofav.png" />
+        <meta name="description" content="A online calulator which is used to calulate your Weighted average mark"></meta>
+      </Head>
       <div className={styles.main}>
    
     <div id={styles.tile} style={{gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)`}}>
