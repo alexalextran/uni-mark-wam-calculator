@@ -16,7 +16,7 @@ The application is live if you would like to give it a try Link down below!
 https://uni-mark-wam-calculator-43qzg2pso-alexalextran.vercel.app/
 ## Screenshots
 
-![App Screenshot](https://i.ibb.co/bgCL48K/Screenshot-2023-01-17-124309.png)
+![App Screenshot](https://i.imgur.com/Gsp6VeO.png)
 
 ![App Screenshot](https://i.imgur.com/9fo2bkF.png)
 
